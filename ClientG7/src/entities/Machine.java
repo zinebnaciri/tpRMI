@@ -8,10 +8,6 @@ package entities;
 import java.io.Serializable;
 
 
-/**
- *
- * @author Lachgar
- */
 
 public class Machine implements Serializable {
 

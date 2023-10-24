@@ -34,6 +34,7 @@ public class Main extends javax.swing.JFrame {
         editMenu = new javax.swing.JMenu();
         machineMenuItem = new javax.swing.JMenuItem();
         SalleMenu = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         editMenu.add(SalleMenu);
+
+        jMenuItem1.setText("machineParSalle");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItem1);
 
         menuBar.add(editMenu);
 
@@ -91,6 +100,13 @@ public class Main extends javax.swing.JFrame {
                 desktopPane.add(sf);
                 sf.setVisible(true);
     }//GEN-LAST:event_SalleMenuActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        machineSalle ms = new machineSalle();
+        desktopPane.add(ms);
+        ms.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +147,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem SalleMenu;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem machineMenuItem;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

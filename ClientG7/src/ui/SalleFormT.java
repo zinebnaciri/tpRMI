@@ -90,10 +90,10 @@ public class SalleFormT extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("G Machine");
+        setTitle("G Salle");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations machine"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations salle"));
 
         jLabel1.setText("salleNom");
 
@@ -157,7 +157,7 @@ public class SalleFormT extends javax.swing.JInternalFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Liste des machines"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Liste des salles"));
 
         salleList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

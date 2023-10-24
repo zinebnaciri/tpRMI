@@ -9,11 +9,7 @@ import java.io.Serializable;
 
 
 
-/**
- *
- * @author Utilisateur
- */
- 
+
 public class Salle implements Serializable {
  
     private int id;

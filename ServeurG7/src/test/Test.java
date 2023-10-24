@@ -5,11 +5,14 @@
  */
 package test;
 
+import dao.IDao;
 import entities.Machine;
+import entities.Salle;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import service.MachineService;
+import service.SalleService;
 
 /**
  *
@@ -19,13 +22,12 @@ public class Test {
     
     public static void main(String[] args) {
         try {
-            MachineService ms = new MachineService();
-            ms.create(new Machine("RE44", "HP", 2000));
-            ms.create(new Machine("RE54", "DELL", 5000));
-            ms.create(new Machine("RE74", "LENOV", 6000));
+            IDao<Machine> dao = new MachineService();
+             IDao<Salle> daoS = new SalleService();
+            daoS.create(new Salle("salle tech"));
             
-            for(Machine m : ms.findAll())
-                System.out.println(m);
+            for(Salle s : daoS.findAll())
+                System.out.println(s);
         } catch (RemoteException ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }

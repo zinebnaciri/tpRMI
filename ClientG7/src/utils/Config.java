@@ -27,8 +27,8 @@ public class Config {
             f = new FileInputStream("config.properties");
             Properties p = new Properties();
             p.load(f);
-            config.ip = p.getProperty("10.10.10.76");
-            config.port = p.getProperty("1099");
+            config.ip = p.getProperty("ip");
+            config.port = p.getProperty("port");
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         } finally {

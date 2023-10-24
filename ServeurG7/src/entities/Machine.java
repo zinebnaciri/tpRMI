@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,20 +23,18 @@ import org.hibernate.annotations.OnDeleteAction;
  * @author Lachgar
  */
 @Entity
-
 @NamedQuery(name = "findAll", query = "from Machine") //HQL
-@NamedNativeQuery(name = "findAllsalleNative", query = "select * from machine", resultClass = Machine.class) 
-public class Machine implements Serializable{
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private int id;
-     private String ref;
-     private String marque;
-     private double prix;
-   @ManyToOne
-   @JoinColumn(name = "salle_id")
-   @OnDelete(action = OnDeleteAction.CASCADE)
-     private Salle salle;
+@NamedNativeQuery(name = "findAllsalleNative", query = "select * from machine", resultClass = Machine.class)
+public class Machine implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String ref;
+    private String marque;
+    private double prix;
+    @ManyToOne
+    private Salle salle;
 
     public Machine(String ref, String marque, double prix, Salle salle) {
         this.ref = ref;
@@ -51,8 +50,7 @@ public class Machine implements Serializable{
     public void setSalle(Salle salle) {
         this.salle = salle;
     }
-     
-  
+
     public Machine() {
     }
 
@@ -98,7 +96,5 @@ public class Machine implements Serializable{
     public String toString() {
         return "Machine{" + "id=" + id + ", ref=" + ref + ", marque=" + marque + ", prix=" + prix + '}';
     }
-     
-     
-    
+
 }

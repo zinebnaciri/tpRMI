@@ -24,7 +24,7 @@ public class Test {
         try {
             IDao<Machine> dao = new MachineService();
              IDao<Salle> daoS = new SalleService();
-            daoS.create(new Salle("salle tech"));
+            
             
             for(Salle s : daoS.findAll())
                 System.out.println(s);

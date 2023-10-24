@@ -27,11 +27,11 @@ public class Serveur {
     public static void main(String[] args) {
         try {
             IDao<Machine> dao = new MachineService();
-            IDao<Salle> daoSalle = new SalleService();
-            LocateRegistry.createRegistry(1099);
+            IDao<Salle> daoS = new SalleService();
+            LocateRegistry.createRegistry(1100);
             
-            Naming.bind("rmi://localhost:1099/dao", dao);
-            Naming.bind("rmi://localhost:1099/daoSalle", daoSalle);
+            Naming.bind("rmi://localhost:1100/dao", dao);
+            Naming.bind("rmi://localhost:1100/daoS", daoS);
             
             System.out.println("En attente des clients");
             

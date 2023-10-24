@@ -5,13 +5,27 @@
  */
 package entities;
 
+import java.io.Serializable;
+
+
+
 /**
  *
  * @author Utilisateur
  */
-public class Salle {
+ 
+public class Salle implements Serializable {
+ 
     private int id;
-    private String nomSalle;
+    private String  nomSalle;
+
+    public Salle() {
+    }
+
+    public Salle(String nomSalle) {
+      
+        this.nomSalle = nomSalle;
+    }
 
     public int getId() {
         return id;
@@ -29,14 +43,14 @@ public class Salle {
         this.nomSalle = nomSalle;
     }
 
-    public Salle(String nomSalle) {
-        this.nomSalle = nomSalle;
-    }
-
     @Override
     public String toString() {
-        return "Salle{" + "id=" + id + ", nomSalle=" + nomSalle + '}';
+        return nomSalle ;
     }
+    
+    
+    
+    
     
     
     

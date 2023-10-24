@@ -80,16 +80,16 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         MachineForm mf = new MachineForm();
         desktopPane.add(mf);
-        mf.show();
+        mf.setVisible(true);
                 
     }//GEN-LAST:event_machineMenuItemActionPerformed
 
     private void SalleMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalleMenuActionPerformed
         // TODO add your handling code here:
-            SalleForm sf = new SalleForm();
-        desktopPane.add(sf);
-        sf.show();
-                
+          
+                SalleFormT sf = new SalleFormT();
+                desktopPane.add(sf);
+                sf.setVisible(true);
     }//GEN-LAST:event_SalleMenuActionPerformed
 
     /**

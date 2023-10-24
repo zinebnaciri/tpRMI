@@ -23,10 +23,8 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            IDao<Machine> ms = (IDao<Machine>) Naming.lookup("rmi://" + Config.ip + ":" + Config.port + "/" + "dao");
-            ms.create(new Machine("RE44", "HP", 2000));
-            ms.create(new Machine("RE54", "DELL", 5000));
-            ms.create(new Machine("RE74", "LENOV", 6000));
+            IDao<Machine> ms = (IDao<Machine>) Naming.lookup("rmi://localhost:1099/dao");
+           
 
             for (Machine m : ms.findAll()) {
                 System.out.println(m);

@@ -26,6 +26,7 @@ public class SalleFormT extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = null;
     IDao<Salle> daoS = null;
+    private static int id;
 
     /**
      * Creates new form MachineForm
@@ -51,19 +52,17 @@ public class SalleFormT extends javax.swing.JInternalFrame {
     public void load() {
         try {
             model.setRowCount(0);
-            for (Iterator<Salle> it = daoS.findAll().iterator(); it.hasNext();) {
-                Salle s =it.next();
-            model.addRow(new Object[]{
+            for (Salle s : daoS.findAll()) {
+                model.addRow(new Object[]{
                     s.getId(),
                     s.getNomSalle()
+
                 });
             }
         } catch (RemoteException ex) {
             Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,8 +128,18 @@ public class SalleFormT extends javax.swing.JInternalFrame {
         });
 
         bnUpdateS.setText("Modifier");
+        bnUpdateS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnUpdateSActionPerformed(evt);
+            }
+        });
 
         bnDeleteS.setText("Supprimer");
+        bnDeleteS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDeleteSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -167,6 +176,11 @@ public class SalleFormT extends javax.swing.JInternalFrame {
                 "ID", "salle"
             }
         ));
+        salleList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salleListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(salleList);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -221,14 +235,50 @@ public class SalleFormT extends javax.swing.JInternalFrame {
     private void bnAddSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddSActionPerformed
         try {
             // TODO add your handling code here:
-            String salleN = txtSalle.getText().toString();
-           
-            daoS.create(new Salle(salleN));
+            String salle = txtSalle.getText().toString();
+
+            daoS.create(new Salle(salle));
             load();
         } catch (RemoteException ex) {
             Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bnAddSActionPerformed
+
+    private void bnUpdateSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnUpdateSActionPerformed
+        // TODO add your handling code here:
+        String code = txtSalle.getText().toString();
+        try {
+            if (daoS.update(new Salle(id, code))) {
+                load();
+                txtSalle.setText("");
+
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bnUpdateSActionPerformed
+
+    private void bnDeleteSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteSActionPerformed
+        // TODO add your handling code here:
+        if (id != 0) {
+            try {
+                if (daoS.delete(daoS.findById(id))) {
+                    load();
+                    txtSalle.setText("");
+
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_bnDeleteSActionPerformed
+
+
+    private void salleListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salleListMouseClicked
+        // TODO add your handling code here:
+        id = Integer.parseInt(model.getValueAt(salleList.getSelectedRow(), 0).toString());
+        txtSalle.setText(model.getValueAt(salleList.getSelectedRow(), 1).toString());
+    }//GEN-LAST:event_salleListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -26,6 +26,7 @@ public class MachineForm extends javax.swing.JInternalFrame {
     IDao<Machine> dao = null;
     DefaultTableModel model = null;
     IDao<Salle> daoS = null;
+        private static int id;
 
     /**
      * Creates new form MachineForm
@@ -70,7 +71,7 @@ public class MachineForm extends javax.swing.JInternalFrame {
     public void loadSalle() {
         try {
             for (Salle s : daoS.findAll()) {
-                
+
                 salleBox1.addItem(s);
 
             }
@@ -175,8 +176,18 @@ public class MachineForm extends javax.swing.JInternalFrame {
         });
 
         bnUpdate.setText("Modifier");
+        bnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnUpdateActionPerformed(evt);
+            }
+        });
 
         bnDelete.setText("Supprimer");
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -213,6 +224,11 @@ public class MachineForm extends javax.swing.JInternalFrame {
                 "ID", "Ref", "Marque", "Prix", "Salle"
             }
         ));
+        machinesList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                machinesListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(machinesList);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -264,13 +280,58 @@ public class MachineForm extends javax.swing.JInternalFrame {
             String ref = txtRef.getText().toString();
             String marque = txtMarque.getText().toString();
             double prix = Double.parseDouble(txtPrix.getText().toString());
-Salle salle = (Salle) salleBox1.getSelectedItem();
+            Salle salle = (Salle) salleBox1.getSelectedItem();
             dao.create(new Machine(ref, marque, prix, salle));
             load();
         } catch (RemoteException ex) {
             Logger.getLogger(MachineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bnAddActionPerformed
+
+    private void bnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnUpdateActionPerformed
+        // TODO add your handling code here:
+        String ref = txtRef.getText().toString();
+        String marque = txtMarque.getText().toString();
+        double prix = Double.parseDouble(txtPrix.getText().toString());
+        Salle salle = (Salle) salleBox1.getSelectedItem();
+        try {
+            if (dao.update(new Machine(id, ref, marque, prix, salle))) {
+                 load();
+                txtRef.setText("");
+                txtMarque.setText("");
+                txtPrix.setText("");
+                salleBox1.getItemAt(-1);
+               
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MachineForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }//GEN-LAST:event_bnUpdateActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+        if (id != 0) {
+            try {
+                dao.delete(dao.findById(id));
+                 load();
+                txtRef.setText("");
+                txtMarque.setText("");
+                txtPrix.setText("");
+                salleBox1.getItemAt(-1);
+            } catch (RemoteException ex) {
+                Logger.getLogger(MachineForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+    }//GEN-LAST:event_bnDeleteActionPerformed
+
+    private void machinesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_machinesListMouseClicked
+        id = Integer.parseInt(model.getValueAt(machinesList.getSelectedRow(), 0).toString());
+        txtRef.setText(model.getValueAt(machinesList.getSelectedRow(), 1).toString());
+        txtMarque.setText(model.getValueAt(machinesList.getSelectedRow(), 2).toString());
+        txtPrix.setText(model.getValueAt(machinesList.getSelectedRow(), 3).toString());
+        salleBox1.setSelectedItem(model.getValueAt(machinesList.getSelectedRow(), 4));
+    }//GEN-LAST:event_machinesListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -47,6 +47,11 @@ public class Salle implements Serializable {
         this.id = id;
     }
 
+    public Salle(int id, String nomSalle) {
+        this.id = id;
+        this.nomSalle = nomSalle;
+    }
+
     public void setNomSalle(String nomSalle) {
         this.nomSalle = nomSalle;
     }

@@ -142,4 +142,9 @@ public class SalleService extends UnicastRemoteObject implements IDao<Salle> {
 
     }
 
+    @Override
+    public List<Salle> findMachinesSalle(Salle o) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

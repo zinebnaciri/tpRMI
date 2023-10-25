@@ -7,6 +7,7 @@ package service;
 
 import dao.IDao;
 import entities.Machine;
+import entities.Salle;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
+
 
 public class MachineService extends UnicastRemoteObject implements IDao<Machine> {
 
@@ -137,5 +139,26 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
         }
         return machines;
     }
-
+  @Override
+    public List<Machine> findMachinesSalle(Salle o) throws RemoteException {
+            Session session=null;
+            Transaction tx=null;
+            List<Machine> machines = null;
+            try{
+            session= HibernateUtil.getSessionFactory().openSession();
+            tx=session.beginTransaction();
+            machines= session.getNamedQuery("findMachinesSalle").setParameter("idS", o).list();
+            tx.commit();
+              } catch (HibernateException ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return machines;
+    }
+    
 }

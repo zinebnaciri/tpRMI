@@ -27,6 +27,11 @@ public class Salle implements Serializable {
         return id;
     }
 
+    public Salle(int id, String nomSalle) {
+        this.id = id;
+        this.nomSalle = nomSalle;
+    }
+
     public String getNomSalle() {
         return nomSalle;
     }

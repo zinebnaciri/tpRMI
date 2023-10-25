@@ -32,12 +32,13 @@ public class SalleFormT extends javax.swing.JInternalFrame {
      * Creates new form MachineForm
      */
     public SalleFormT() {
+        initComponents();
         try {
-            initComponents();
 
             model = (DefaultTableModel) salleList.getModel();
 
             daoS = (IDao<Salle>) Naming.lookup("rmi://" + Config.ip + ":" + Config.port + "/daoS");
+                 load();
         } catch (NotBoundException ex) {
             Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -45,7 +46,7 @@ public class SalleFormT extends javax.swing.JInternalFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
         }
-        load();
+   
 
     }
 
@@ -248,11 +249,12 @@ public class SalleFormT extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String code = txtSalle.getText().toString();
         try {
-            if (daoS.update(new Salle(id, code))) {
-                load();
-                txtSalle.setText("");
+            daoS.update(new Salle(id, code));
 
-            }
+                txtSalle.setText("");
+                load();
+         
+           
         } catch (RemoteException ex) {
             Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -262,11 +264,12 @@ public class SalleFormT extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (id != 0) {
             try {
-                if (daoS.delete(daoS.findById(id))) {
+                daoS.delete(daoS.findById(id));
                     load();
+                    
                     txtSalle.setText("");
 
-                }
+                
             } catch (RemoteException ex) {
                 Logger.getLogger(SalleFormT.class.getName()).log(Level.SEVERE, null, ex);
             }

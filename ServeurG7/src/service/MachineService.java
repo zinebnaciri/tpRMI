@@ -147,7 +147,7 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
             try{
             session= HibernateUtil.getSessionFactory().openSession();
             tx=session.beginTransaction();
-            machines= session.getNamedQuery("findMachinesSalle").setParameter("idS", o).list();
+            machines= session.getNamedQuery("findAllsalleNative").setParameter("idS", o).list();
             tx.commit();
               } catch (HibernateException ex) {
             if (tx != null) {

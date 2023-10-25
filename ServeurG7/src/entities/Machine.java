@@ -24,7 +24,7 @@ import org.hibernate.annotations.OnDeleteAction;
  */
 @Entity
 @NamedQuery(name = "findAll", query = "from Machine") //HQL
-@NamedNativeQuery(name = "findAllsalleNative", query = "select * from machine", resultClass = Machine.class)
+@NamedNativeQuery(name = "findAllsalleNative", query = "select * from machine WHERE salle_id=:idS ", resultClass = Machine.class)
 public class Machine implements Serializable {
 
     @Id
